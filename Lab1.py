@@ -29,7 +29,7 @@ def read_blocks_from_csv(filename: str = "blocks_votes.csv") -> List[Block]:
     with open(filename, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            if row['id'] and row['view']:  # Переконаємося, що дані не пусті
+            if row['id'] and row['view']:  
                 try:
                     blocks.append(Block(row['id'], int(row['view'])))
                 except ValueError:
@@ -41,7 +41,7 @@ def read_votes_from_csv(filename: str = "blocks_votes.csv") -> List[str]:
     with open(filename, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            if 'block_id' in row and row['block_id']:  # Переконаємося, що поле існує і не пусте
+            if 'block_id' in row and row['block_id']:  
                 votes.append(row['block_id'])
     return votes
 
@@ -55,7 +55,7 @@ def main():
     for vote in votes:
         blockchain.add_vote(vote)
     
-    for block in sorted(blocks, key=lambda b: b.view):  # Сортуємо блоки за view
+    for block in sorted(blocks, key=lambda b: b.view):  
         blockchain.add_block(block)
     
     print("Фінальний ланцюг блоків:")
